@@ -1,0 +1,20 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-pc-sc
+provisioner: csi.nutanix.com
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+parameters:
+  csi.storage.k8s.io/node-publish-secret-name: pc-files-secret
+  csi.storage.k8s.io/node-publish-secret-namespace: ntnx-system
+  csi.storage.k8s.io/controller-expand-secret-name: pc-files-secret
+  csi.storage.k8s.io/controller-expand-secret-namespace: ntnx-system
+  csi.storage.k8s.io/provisioner-secret-name: pc-files-secret
+  csi.storage.k8s.io/provisioner-secret-namespace: ntnx-system
+  dynamicProv: ENABLED
+  nfsServer: FILE-SERVER.kuberox.net
+  nfsServerName: FILE-SERVER
+  storageType: NutanixFiles
+  squashType: root-squash
