@@ -1,0 +1,34 @@
+loki:
+  annotations:
+    secret.reloader.stakater.com/reload: srikar-mgmt-loki-obj-creds
+  structuredConfig:
+    storage_config:
+      aws:
+        s3: http://190.170.21.115/srikar-mgmt-looki
+        region: us-east-1
+        s3forcepathstyle: true
+        insecure: true
+ingester:
+  extraEnvFrom:
+    - secretRef:
+        name: srikar-mgmt-loki-obj-creds
+querier:
+  extraEnvFrom:
+    - secretRef:
+        name: srikar-mgmt-loki-obj-creds
+queryFrontend:
+  extraEnvFrom:
+    - secretRef:
+        name: srikar-mgmt-loki-obj-creds
+compactor:
+  extraEnvFrom:
+    - secretRef:
+        name: srikar-mgmt-loki-obj-creds
+ruler:
+  extraEnvFrom:
+    - secretRef:
+        name: srikar-mgmt-loki-obj-creds
+distributor:
+  extraEnvFrom:
+    - secretRef:
+        name: srikar-mgmt-loki-obj-creds

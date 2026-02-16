@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: path-based-ingress
+  namespace: default  # must match where middleware and services are
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-strip-prefixes@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: srikaringress.kuberox.net
+      http:
+        paths:
+          - path: /app1
+            pathType: Prefix
+            backend:
+              service:
+                name: app1
+                port:
+                  number: 80
+          - path: /app2
+            pathType: Prefix
+            backend:
+              service:
+                name: app2
+                port:
+                  number: 80
